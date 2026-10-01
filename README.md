@@ -6,6 +6,12 @@ Werbefreies, clientseitiges 3D-Puzzle in TypeScript, Three.js und Vite. Keine Ko
 
 [Prüfbericht](docs/VALIDATION.md) · [Automatische Tests](../../actions)
 
+## Direkt spielen
+
+https://jasminetagwercher-alt.github.io/arrow3d/
+
+Der Workflow **Publish VECTOR to GitHub Pages** baut das Spiel und veröffentlicht ausschließlich `dist/`. Unter **Settings → Pages → Build and deployment → Source** muss **GitHub Actions** ausgewählt sein. Der Quellcode auf `main` ist nicht direkt als statische Website ausführbar.
+
 ## Lokal starten
 
 Node.js 22.12+ oder 24 LTS:
@@ -73,13 +79,13 @@ Fortschritt, Sterne und Einstellungen liegen ausschließlich in `localStorage` u
 
 Der Produktions-Build erzeugt App-Icons, Manifest und einen versionierten Service Worker. Nach dem ersten vollständigen Laden unter HTTPS (oder localhost) startet VECTOR auch ohne Verbindung; die gesamte Kampagne wird zwischengespeichert. Die Installation erfolgt über die Browserfunktion „App installieren“ bzw. „Zum Home-Bildschirm“. Im Vite-Entwicklungsmodus bleibt der Service Worker deaktiviert. Ein Update wird nach dem Schließen der alten Spiel-Tabs aktiv.
 
-GitHub Actions prüft Logik, Build, Browser und Offline-Verhalten und stellt `dist/` als herunterladbares Artefakt bereit. Es erfolgt keine automatische Veröffentlichung.
+GitHub Actions prüft Logik, Build, Browser und Offline-Verhalten und stellt `dist/` als herunterladbares Artefakt bereit. Ein separater Pages-Workflow veröffentlicht den Produktions-Build bei Änderungen an `main`.
 
 ## Noch offen / sinnvolle nächste Schritte
 
 - Menschliche Spieltests und Feinkuration der Levelkurve.
 - Tests auf realen iOS-/Android-Geräten und deren Installationsdialogen.
 - Editor-Undo/Redo, Spiegelung und Mehrfachauswahl (optionale Erweiterungen).
-- Website-Hosting konfigurieren; ein GitHub-Repository allein ist noch keine veröffentlichte Spieladresse.
+- Nach Änderungen den Pages-Workflow und die Live-Adresse prüfen.
 
 Eigenständige Gestaltung und eigene Level. Keine Assets, Marken oder Level anderer Spiele übernommen.
