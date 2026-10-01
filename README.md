@@ -1,16 +1,27 @@
-# VECTOR
+# VECTOR · Oberflächen-Puzzle
 
-Werbefreies, clientseitiges 3D-Puzzle in TypeScript, Three.js und Vite. Keine Konten, Analytics, externen Fonts oder In-App-Käufe.
+**Direkt spielen:** https://jasminetagwercher-alt.github.io/arrow3d/
 
-![VECTOR – Level 25](docs/preview.png)
+Lange, geknickte Pfeilbahnen liegen auf den sechs Flächen eines geschlossenen Würfels. Sie schlängeln sich über Kanten und zwischen den anderen Bahnen hindurch. Ein freier Pfeil zieht sich als zusammenhängende Linie heraus.
 
-[Prüfbericht](docs/VALIDATION.md) · [Automatische Tests](../../actions)
+![VECTOR – verschlungene Bahnen auf einem Würfel](docs/surface-preview.png)
 
-## Direkt spielen
+## Stand dieser Version
 
-https://jasminetagwercher-alt.github.io/arrow3d/
+Die neue Spielmechanik enthält **fünf sofort spielbare Würfel** mit 9, 10, 14, 15 und 23 langen Pfeilbahnen. Alle sind mathematisch lösbar und wurden im Browser vollständig über die Oberfläche gelöst. Dies ist der vereinbarte erste Prototyp für die korrigierte Spielidee; die neue 100-Level-Kampagne und weitere Körperformen folgen erst nach der Erprobung.
 
-Der Workflow **Publish VECTOR to GitHub Pages** baut das Spiel und veröffentlicht ausschließlich `dist/`. Unter **Settings → Pages → Build and deployment → Source** muss **GitHub Actions** ausgewählt sein. Der Quellcode auf `main` ist nicht direkt als statische Website ausführbar.
+Die frühere Umsetzung mit frei schwebenden kurzen Pfeilen bleibt über **Frühere Version** bzw. `?classic=1` erreichbar. Ihre 100 Levels, Werkstatt und bisherigen Spielstände bleiben getrennt erhalten.
+
+## Regeln und Bedienung
+
+- Jede Bahn hat ein Ende und eine Pfeilspitze. Ihr Verlauf kann über mehrere Würfelseiten führen.
+- Die **gerade Linie vor der Spitze bis zur nächsten Körperkante** muss frei von anderen Pfeilbahnen sein. Jeder Abschnitt einer anderen Bahn kann blockieren, nicht nur deren Spitze.
+- Beim Lösen bewegt sich die Spitze tangential geradeaus in den freien Raum. Das Ende wird entlang des bisherigen Verlaufs nachgezogen. Die Austrittsrichtung folgt nicht erneut um die nächste Würfelkante.
+- Ziehen dreht, Mausrad oder Pinch zoomt. Tippen auf einen beliebigen sichtbaren Abschnitt wählt die ganze Bahn. Beim Darüberfahren wird sie blau hervorgehoben.
+- Der Körper verdeckt tatsächlich die rückwärtigen Bahnen. Durch ihn hindurch kann nicht geklickt werden.
+- Pfeiltasten drehen; + / − zoomen; 0 zentriert. Die **Pfeilliste** bietet alternative Tastaturbedienung.
+- Drei Hinweisstufen: allgemeiner Tipp, passende Seite zeigen, konkrete freie Bahn markieren.
+- Keine Leben, Werbung, Anmeldung oder Zeitlimits. Optionale synthetische Klänge; reduzierte Bewegung folgt der Systemeinstellung.
 
 ## Lokal starten
 
@@ -21,44 +32,23 @@ npm ci
 npm run dev
 ```
 
-Die von Vite angezeigte lokale URL öffnen. Produktionsversion: `npm run build`, danach `npm run preview`. Den Inhalt von `dist/` auf einem statischen HTTPS-Host bereitstellen. Relative Assetpfade unterstützen Unterordner wie `/arrow3d/`.
+Produktionsversion: `npm run build`, anschließend `npm run preview`. Der Ordner `dist/` ist die fertige statische Website. Relative Assetpfade unterstützen `/arrow3d/`.
 
-## Steuerung
+## Architektur der neuen Mechanik
 
-- Maus / ein Finger ziehen: Kamera drehen. Klick / Tippen: Pfeil entfernen.
-- Mausrad / Pinch: Zoom. Zentrierknopf: Ausgangsansicht.
-- Pfeiltasten: Kamera drehen; + / −: Zoom; 0: Zentrieren.
-- **Pfeilliste**: alternative Tastaturbedienung, einschließlich verdeckter Pfeile.
-- Drei Hinweisstufen: allgemeiner Tipp, Ebene markieren, freien Pfeil markieren.
-- Zen ohne Zeitdruck; Challenge mit Fehlern und Sternen. 3 Sterne ohne Fehler/Hinweise, 2 bei höchstens 3 Fehlern, sonst 1. Kein Game-over.
+- `src/entry.ts`: Standardspiel und separat erreichbare frühere Fassung.
+- `src/surface/core.ts`: rendererunabhängiges Flächenraster, Kantenübergänge, Parser, Blockaden und vollständiger Solver.
+- `src/surface/generator.ts`: deterministische Reverse-Generation langer, mehrfach geknickter Bahnen.
+- `src/surface/view.ts`: geschlossener Körper, Bahnen, verdeckungsrichtige Auswahl und Nachzieh-Animation.
+- `src/surface/app.ts`: Bedienung, fünf Würfel, Hinweise und separater lokaler Fortschritt.
+- `public/levels/surface.json`: externe Leveldaten mit vollständigen Pfaden von Ende zu Spitze.
+- `scripts/surface-levels.ts`: reproduzierbare Erstellung der fünf Würfel.
 
-## Architektur
+Jede Fläche besitzt ganzzahlige Rasterkoordinaten. Kantenübergänge transportieren Position und Bewegungsrichtung in das Koordinatensystem der Nachbarfläche. Belegte Felder dürfen sich nicht überschneiden, Pfade müssen lückenlos sein, und eine Bahn darf ihre eigene Austrittslinie nicht belegen. Entfernen bleibt monoton: Ein erlaubter Zug kann keine neue Blockade erzeugen. Deshalb ist der Solver ohne exponentielles Backtracking vollständig.
 
-- `src/core/puzzle.ts`: reine Rasterregeln, Parser, unveränderliche Spielzüge.
-- `src/core/solver.ts`: vollständiger Solver und transparente Schwierigkeitsheuristik.
-- `src/game/scene.ts`: Three.js, OrbitControls, Raycasting, Animationen, gemeinsame Geometrien.
-- `src/game/audio.ts`: optionale synthetische Klänge; keine Audio-Downloads.
-- `src/levels/`: Laden und deterministische Reverse-Generation.
-- `src/storage/save.ts`: versionierter, validierter lokaler Fortschritt mit Fehlerbehandlung.
-- `src/editor/editor.ts`: integrierte 3D-Werkstatt, Bearbeitung, Import/Export, Solver, Generator.
-- `public/levels/campaign.json`: externe Leveldefinitionen.
-- `tests/`: Logik- und Browserprüfungen.
+Die Darstellung hebt Linien minimal von der Oberfläche ab, damit sie sauber sichtbar bleiben. Beim Überqueren einer Kante wird ein zusätzlicher Eckpunkt eingesetzt; dadurch schneiden die Bahnen nicht durch den Körper. Die Auszieh-Animation ist anhand der Weglänge parametrisiert.
 
-### Warum kein Backtracking?
-
-Jeder Pfeil besetzt genau eine ganzzahlige Rasterzelle. Jede andere belegte Zelle auf demselben positiven Richtungsstrahl blockiert ihn – unabhängig von deren Richtung. Die Pfeilgeometrie liegt vollständig innerhalb der Zelle. Nur Entfernen ist erlaubt: Ein legaler Zug kann nie einen bisher freien Weg blockieren. Deshalb ist eine topologische Elimination vollständig, ohne exponentiellen Suchbaum. Ein Restzustand ohne freie Pfeile enthält einen Abhängigkeitszyklus oder hängt davon ab. Für ein lösbares Puzzle sind genau so viele Schritte nötig, wie es Pfeile gibt. Es gibt keine legalen Fehlentscheidungen, die später eine Sackgasse erzeugen. Schwierigkeit entsteht aus Erkennen, Verdeckung und Abhängigkeiten, nicht aus strategischen Fallen.
-
-### Levelqualität
-
-Die ersten fünf Levels sind handgebaut. Weitere Levels werden aus je zwölf deterministischen Reverse-Generation-Kandidaten ausgewählt und mit derselben Spiellogik vollständig gelöst. Die Heuristik berücksichtigt Größe, Startzüge, Abhängigkeitstiefe und achsenbezogene Verdeckung. Sie ist **keine wissenschaftliche Schwierigkeitsmessung**. `public/levels/curation.json` dokumentiert die Auswahl. Eine echte menschliche Spieltest-Kuration und Feinabstimmung der 100-Level-Kurve bleibt sinnvoll.
-
-## Werkstatt
-
-Unten auf **Werkstatt** klicken. Pfeile im Bild oder in der Liste wählen; X/Y/Z und Richtung ändern; Änderungen mit **Übernehmen** sichern. **Hinzufügen** nutzt die eingestellten Koordinaten und lehnt Doppelbelegungen ab. Eigene Levels als JSON exportieren; Werkstattänderungen bleiben bis zum Schließen im Speicher und verändern die Kampagne nicht. Der Generator besitzt einen reproduzierbaren Seed. Solverbefund und Lösung erscheinen unter **Lösbarkeit prüfen**. **Level spielen** öffnet eine Testsitzung, die keine Kampagnensterne freischaltet.
-
-`?dev` zeigt FPS, Draw Calls, Level, Pfeilzahl, freie Züge und Solverbefund. Die interne Browser-Testbrücke existiert ausschließlich im Vite-Entwicklungsmodus.
-
-## Prüfen
+## Prüfen und neue Würfel erzeugen
 
 ```sh
 npm test
@@ -66,26 +56,28 @@ npm run build
 npx playwright install chromium
 npm run test:browser
 npm run test:offline
-npm run generate
+node --import tsx scripts/surface-levels.ts
 ```
 
-`CHROMIUM_PATH` kann für eine bereits installierte Chromium-Binary gesetzt werden. Die Tests decken sechs Richtungen, Blockaden, unveränderliche Züge, Zyklen, Parser, Speichern und Lösungen der Kampagne ab. Browserprüfungen nutzen echte UI-Interaktionen und WebGL; Headless-Messungen mit Software-Rendering ersetzen keine Messungen auf echten Smartphones.
+`CHROMIUM_PATH` kann auf einen bereits installierten Chromium-Browser zeigen. Die Tests enthalten weiterhin die Regressionstests der früheren Version. Die zusätzlichen Oberflächentests prüfen Kantenübergänge, fremde Bahnabschnitte als Blockaden, vollständige Lösungen, verdeckte Pfeile, Drag-/Touch-Gesten und die Bewegung beim Herausziehen. Desktop-/Mobilbilder wurden visuell geprüft. Echte iOS-/Android-Geräte und die endgültige Levelkurve sind noch nicht abschließend getestet.
 
-## Speicherung und Datenschutz
+[Prüfbericht zur neuen Mechanik](docs/SURFACE-VALIDATION.md)
 
-Fortschritt, Sterne und Einstellungen liegen ausschließlich in `localStorage` unter `vector-save-v1`. Löschen der Browserdaten entfernt den Spielstand. Ist der Speicher gesperrt, funktioniert das Spiel für die Sitzung weiter. Ein gestarteter Level wird beim Neuladen von vorn begonnen. Kein Tracking und keine personenbezogenen Eingaben.
+## Speicherung und Offline-Betrieb
 
-## Offline / Installation
+Die neue Fassung speichert unter `vector-surface-v2`, die frühere unter `vector-save-v1`. Das Zurücksetzen einer Fassung verändert die andere nicht. Der aktuelle Würfel beginnt beim erneuten Laden von vorn; abgeschlossene Würfel und Audioeinstellung bleiben erhalten.
 
-Der Produktions-Build erzeugt App-Icons, Manifest und einen versionierten Service Worker. Nach dem ersten vollständigen Laden unter HTTPS (oder localhost) startet VECTOR auch ohne Verbindung; die gesamte Kampagne wird zwischengespeichert. Die Installation erfolgt über die Browserfunktion „App installieren“ bzw. „Zum Home-Bildschirm“. Im Vite-Entwicklungsmodus bleibt der Service Worker deaktiviert. Ein Update wird nach dem Schließen der alten Spiel-Tabs aktiv.
+Der Produktions-Build erzeugt Manifest, Icons und einen Service Worker. Nach dem ersten vollständigen Laden sind beide Fassungen offline verfügbar. Neue Worker werden nach erfolgreichem vollständigem Caching aktiviert. Die vorherige Cachegeneration bleibt für noch offene ältere Tabs erhalten. Bei einer neuen Veröffentlichung die Seite neu laden.
 
-GitHub Actions prüft Logik, Build, Browser und Offline-Verhalten und stellt `dist/` als herunterladbares Artefakt bereit. Ein separater Pages-Workflow veröffentlicht den Produktions-Build bei Änderungen an `main`.
+## GitHub Pages
 
-## Noch offen / sinnvolle nächste Schritte
+Unter **Settings → Pages → Build and deployment → Source** muss **GitHub Actions** ausgewählt sein. Der Workflow **Publish VECTOR to GitHub Pages** baut das Spiel und veröffentlicht `dist/`. Die direkte Veröffentlichung des Quellcodes aus `main` führt zu einer leeren Seite und konkurriert mit dem korrekten Deployment.
 
-- Menschliche Spieltests und Feinkuration der Levelkurve.
-- Tests auf realen iOS-/Android-Geräten und deren Installationsdialogen.
-- Editor-Undo/Redo, Spiegelung und Mehrfachauswahl (optionale Erweiterungen).
-- Nach Änderungen den Pages-Workflow und die Live-Adresse prüfen.
+## Nächste Entwicklungsschritte
 
-Eigenständige Gestaltung und eigene Level. Keine Assets, Marken oder Level anderer Spiele übernommen.
+- Spielgefühl und gewünschte Bewegungsregeln anhand dieser fünf Würfel erproben.
+- Weitere Körperformen (Quader, abgewinkelte Körper) ergänzen.
+- Neue Oberflächen-Kampagne kuratieren und den Editor auf Flächenbahnen erweitern.
+- Reale Touch-Geräte, Sichtbarkeit dichter Muster und längere Spielsitzungen testen.
+
+Eigenständiger Code, eigene Gestaltung und eigene Level; keine übernommenen Spiel-Assets.

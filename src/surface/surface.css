@@ -1,0 +1,235 @@
+.surface-game main {
+  grid-template-columns: 29% 1fr;
+  column-gap: 5%;
+  padding-top: 35px;
+}
+.surface-game .intro {
+  padding-top: 27px;
+}
+.surface-game h1 {
+  font-size: clamp(38px, 3.6vw, 56px);
+  letter-spacing: -2px;
+}
+.surface-game .play-space {
+  height: min(70vh, 740px);
+  min-height: 565px;
+  background: radial-gradient(
+    ellipse at 50% 38%,
+    #f3f5f0 0%,
+    #e7ede5 65%,
+    #dfe7dd 100%
+  );
+}
+.surface-rule {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  color: #637462;
+  margin-top: 24px;
+  max-width: 310px;
+}
+.surface-rule p {
+  margin: 0;
+  line-height: 1.85;
+}
+.surface-rule strong {
+  font-weight: 500;
+  color: #3c5a47;
+}
+.rule-symbol {
+  font-size: 27px;
+  color: #5c806a;
+}
+.surface-game #help-button {
+  margin: 15px 0 0;
+  padding-left: 0;
+  font-size: 11px;
+}
+.surface-game #status {
+  bottom: 80px;
+  left: 25px;
+  right: 25px;
+  text-align: center;
+  background: #f4f7efda;
+  border-radius: 8px;
+  padding: 8px 11px;
+  width: fit-content;
+  max-width: calc(100% - 50px);
+  margin: auto;
+  font-size: 11px;
+}
+.surface-game #hover-caption {
+  position: absolute;
+  top: 76px;
+  left: 28px;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: #387795;
+  pointer-events: none;
+}
+.surface-levels {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0;
+}
+.surface-level {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  min-height: 70px;
+  background: #eef2e8;
+  border: 1px solid #d7dfd0;
+  border-radius: 10px;
+  text-align: left;
+  padding: 15px 20px;
+}
+.surface-level.current {
+  border-color: #668368;
+}
+.surface-level > span {
+  font-size: 26px;
+  color: #6e8167;
+  font-weight: 300;
+}
+.surface-level > div {
+  flex: 1;
+}
+.surface-level strong {
+  font-size: 15px;
+  font-weight: 500;
+  display: block;
+}
+.surface-level small {
+  font-size: 11px;
+  color: #73826c;
+  display: block;
+  margin-top: 6px;
+}
+.surface-help {
+  padding-left: 20px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #66766d;
+}
+.surface-help li {
+  margin: 17px 0;
+}
+.surface-help strong {
+  color: #294c3a;
+}
+.surface-game footer a {
+  color: #6b7968;
+  text-decoration: none;
+  font-size: 10px;
+}
+@media (max-width: 1050px) {
+  .surface-game main {
+    grid-template-columns: 29% 1fr;
+    column-gap: 4%;
+  }
+  .surface-game h1 {
+    font-size: 40px;
+  }
+  .surface-game .play-space {
+    min-height: 490px;
+  }
+  .surface-rule {
+    font-size: 11px;
+  }
+  .surface-game .intro-copy {
+    font-size: 12px;
+  }
+}
+@media (max-width: 680px) {
+  .surface-game main {
+    padding-top: 17px;
+  }
+  .surface-game .intro {
+    padding-top: 0;
+    grid-template-columns: 1fr 1fr;
+  }
+  .surface-game h1 {
+    font-size: 31px;
+  }
+  .surface-game .play-space {
+    min-height: 370px;
+    height: 57dvh;
+    max-height: 640px;
+  }
+  .surface-rule,
+  .surface-game #help-button {
+    display: none;
+  }
+  .surface-game .chapter-card {
+    padding-top: 16px;
+  }
+  .surface-game .chapter-card p {
+    font-size: 10px;
+  }
+  .surface-game #status {
+    font-size: 10px;
+    left: 15px;
+    right: 15px;
+    bottom: 71px;
+    max-width: calc(100% - 30px);
+    padding: 6px 8px;
+  }
+  .surface-game #hover-caption {
+    top: 56px;
+    left: 18px;
+    font-size: 9px;
+  }
+  .surface-game .stage-top {
+    z-index: 2;
+  }
+  .surface-game .gesture {
+    font-size: 9px;
+  }
+  .surface-game .top-actions .text-button {
+    font-size: 11px;
+  }
+  .surface-game .intro > .eyebrow {
+    font-size: 8px;
+  }
+}
+@media (max-height: 550px) and (min-width: 681px) {
+  .surface-game .play-space {
+    height: 74vh;
+    min-height: 300px;
+  }
+  .surface-game h1 {
+    font-size: 32px;
+  }
+  .surface-rule,
+  .surface-game #help-button {
+    display: none;
+  }
+  .surface-game .intro {
+    padding-top: 0;
+  }
+  .surface-game main {
+    padding-top: 12px;
+  }
+  .surface-game #status {
+    bottom: 66px;
+    font-size: 10px;
+  }
+}
+.surface-game .game-toolbar {
+  flex-wrap: wrap;
+  row-gap: 12px;
+}
+.surface-game #status {
+  position: static;
+  flex-basis: 100%;
+  width: 100%;
+  max-width: none;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  background: none;
+  font-size: 11px;
+  line-height: 1.5;
+}

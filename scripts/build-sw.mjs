@@ -74,10 +74,10 @@ writeFileSync(
 const PREFIX='vector-'+new URL(self.registration.scope).pathname+'-';
 const CACHE=PREFIX+'${version}';
 const FILES=${JSON.stringify(files)};
-self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES.map(file=>new URL(file,self.registration.scope).href))));});
-self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith(PREFIX)&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim()));});
+self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES.map(file=>new URL(file,self.registration.scope).href))).then(()=>self.skipWaiting()));});
+self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith(PREFIX)&&key!==CACHE).slice(0,-1).map(key=>caches.delete(key)))).then(()=>self.clients.claim()));});
 self.addEventListener('fetch',event=>{const url=new URL(event.request.url);if(event.request.method!=='GET'||url.origin!==self.location.origin||!url.href.startsWith(self.registration.scope))return;
- event.respondWith(caches.open(CACHE).then(async cache=>{if(event.request.mode==='navigate')return await cache.match(new URL('index.html',self.registration.scope).href)||fetch(event.request);return await cache.match(event.request,{ignoreVary:true})||fetch(event.request);}));});
+ event.respondWith(caches.open(CACHE).then(async cache=>{if(event.request.mode==='navigate')return await cache.match(new URL('index.html',self.registration.scope).href)||fetch(event.request);return await cache.match(event.request,{ignoreVary:true})||await caches.match(event.request,{ignoreVary:true})||fetch(event.request);}));});
 `,
 );
 console.log(`Offline build: ${files.length} assets, cache version ${version}`);

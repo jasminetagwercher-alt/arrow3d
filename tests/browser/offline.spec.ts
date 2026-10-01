@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-test("production app reloads offline with every level and its icons cached", async ({
+test("production app reloads offline with every surface level and its icons cached", async ({
   browser,
 }) => {
   const context = await browser.newContext();
@@ -14,16 +14,16 @@ test("production app reloads offline with every level and its icons cached", asy
     if (m.type() === "error") console.log("console", m.text());
   });
   await page.goto("http://127.0.0.1:4173/");
-  await expect(page.locator("#stage-level")).toHaveText("LEVEL 01");
+  await expect(page.locator("#stage-level")).toHaveText("WÜRFEL 01");
   await page.evaluate(() => navigator.serviceWorker.ready);
   await page.reload();
-  await expect(page.locator("#stage-level")).toHaveText("LEVEL 01");
+  await expect(page.locator("#stage-level")).toHaveText("WÜRFEL 01");
   await page.waitForFunction(() => !!navigator.serviceWorker.controller);
   await context.setOffline(true);
   await page.reload();
-  await expect(page.locator("#stage-level")).toHaveText("LEVEL 01");
+  await expect(page.locator("#stage-level")).toHaveText("WÜRFEL 01");
   await page.locator("#levels-button").click();
-  await expect(page.locator("[data-level]")).toHaveCount(100);
+  await expect(page.locator("[data-level]")).toHaveCount(5);
   expect(errors).toEqual([]);
   await context.close();
 });

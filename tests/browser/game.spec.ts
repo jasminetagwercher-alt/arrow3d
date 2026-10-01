@@ -1,6 +1,6 @@
 import { test, expect, type Page } from "@playwright/test";
 async function ready(page: Page) {
-  await page.goto("/");
+  await page.goto("/?classic=1");
   await page.waitForFunction(() => !!(window as any).__vector);
 }
 async function choose(page: Page, id: string) {
@@ -147,7 +147,7 @@ test("touch tap, drag and pinch distinguish gestures", async ({ browser }) => {
     isMobile: true,
   });
   const page = await context.newPage();
-  await page.goto("http://127.0.0.1:5173");
+  await page.goto("http://127.0.0.1:5173/?classic=1");
   await page.waitForFunction(() => !!(window as any).__vector);
   const p = await page.evaluate(() => (window as any).__vector.project("a02"));
   await page.touchscreen.tap(p.x, p.y);
