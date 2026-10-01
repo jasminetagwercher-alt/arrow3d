@@ -3,13 +3,14 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
-  # If Pages still publishes main directly, deploy the built app afterwards.
+  # Re-publish after validation; wait for any legacy branch publication first.
   workflow_run:
-    workflows: ["pages build and deployment"]
+    workflows: ["Validate VECTOR"]
     types: [completed]
     branches: [main]
 permissions:
   contents: read
+  actions: read
   pages: write
   id-token: write
 concurrency:
@@ -20,6 +21,19 @@ jobs:
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
+      - name: Wait for legacy Pages publication
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+          DEPLOY_SHA: ${{ github.sha }}
+        run: |
+          for attempt in $(seq 1 24); do
+            pending="$(gh api "repos/$REPOSITORY/actions/runs?head_sha=$DEPLOY_SHA&per_page=100" --jq '[.workflow_runs[] | select(.name == "pages build and deployment" and .status != "completed")] | length')"
+            if [ "$pending" = "0" ]; then exit 0; fi
+            sleep 5
+          done
+          echo "Legacy Pages publication has not finished; retry this workflow."
+          exit 1
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
