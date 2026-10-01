@@ -1,0 +1,32 @@
+import {SceneManager} from '../game/scene';
+import {parseLevel,vectors,type Arrow,type Level,type Direction} from '../core/puzzle';
+import {analyze} from '../core/solver';
+import {generate} from '../levels/generator';
+export function openEditor(dialog:HTMLDialogElement,container:HTMLElement,source:Level,onTest:(l:Level)=>void){
+ let draft:Level=structuredClone(source),scene:SceneManager|undefined;
+ const escape=(s:string)=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]!));
+ container.innerHTML=`<div class="eyebrow">VECTOR / WERKSTATT</div><h2>Dein Raum. Deine Regeln.</h2><p class="small">Pfeile im 3D-Bild wählen oder Koordinaten bearbeiten. Das Raster zeigt die Grundebene.</p><div id="editor-scene"></div><div class="editor-fields"><label>Name<input id="edit-name" maxlength="80"></label><label>Pfeil<select id="edit-arrow"></select></label></div><div class="editor-coordinates">${['x','y','z'].map(k=>`<label>${k.toUpperCase()}<input id="edit-${k}" type="number" min="-20" max="20" step="1" value="0"></label>`).join('')}<label>Richtung<select id="edit-direction">${Object.keys(vectors).map(d=>`<option>${d}</option>`).join('')}</select></label></div><div class="editor-actions"><button id="edit-update">Übernehmen</button><button id="edit-add">+ Hinzufügen</button><button id="edit-delete">Löschen</button><button id="edit-center">Zentrieren</button></div><p id="editor-message" role="status" class="small"></p><div class="editor-actions"><button id="edit-solve">Lösbarkeit prüfen</button><button id="edit-test" class="primary">Level spielen ↗</button><button id="edit-export">JSON exportieren</button></div><details><summary>JSON bearbeiten / importieren</summary><textarea id="edit-json" rows="8" aria-label="Level JSON" spellcheck="false"></textarea><div class="editor-actions"><button id="edit-import">JSON übernehmen</button><label class="file-label">Datei öffnen<input id="edit-file" type="file" accept=".json,application/json"></label></div></details><details><summary>Levelgenerator</summary><div class="editor-fields"><label>Pfeile<input id="gen-count" type="number" min="1" max="150" value="30"></label><label>Seed<input id="gen-seed" type="number" value="42"></label><label>Form<select id="gen-shape"><option value="block">Block</option><option value="tower">Turm</option><option value="shell">Hülle</option><option value="cross">Kreuz</option><option value="ring">Ring</option></select></label></div><button id="edit-generate" class="primary">Lösbares Puzzle erzeugen</button></details>`;
+ if(!dialog.open)dialog.showModal();dialog.classList.add('editor-dialog');
+ const $=<T extends HTMLElement=HTMLElement>(id:string)=>container.querySelector<T>('#'+id)!;
+ const input=(id:string)=>$<HTMLInputElement>(id),select=$<HTMLSelectElement>('edit-arrow');
+ const message=(s:string)=>{$('editor-message').textContent=s;};
+ const guard=(fn:()=>void)=>{try{fn();}catch(e){message(e instanceof Error?e.message:'Ungültige Eingabe.');}};
+ const sync=(reset=false)=>{input('edit-name').value=draft.name;select.innerHTML=draft.arrows.map(a=>`<option value="${escape(a.id)}">${escape(a.id)}</option>`).join('');$<HTMLTextAreaElement>('edit-json').value=JSON.stringify(draft,null,2);scene?.setArrows(draft.arrows,reset);fields();};
+ const fields=()=>{const a=draft.arrows.find(a=>a.id===select.value);if(!a)return;for(const k of ['x','y','z'] as const)input('edit-'+k).value=String(a[k]);$<HTMLSelectElement>('edit-direction').value=a.direction;scene?.highlight([a.id]);};
+ const values=(id:string):Arrow=>({id,x:Number(input('edit-x').value),y:Number(input('edit-y').value),z:Number(input('edit-z').value),direction:$<HTMLSelectElement>('edit-direction').value as Direction});
+ const update=(arrows:Arrow[])=>{draft=parseLevel({...draft,name:input('edit-name').value||'Mein Puzzle',arrows});sync();message('Änderung übernommen. Prüfe das Puzzle vor dem Spielen.');};
+ try{scene=new SceneManager($('editor-scene'));scene.setGrid(true);scene.onPick=id=>{select.value=id;fields();};}catch{message('3D-Vorschau nicht verfügbar. JSON-Bearbeitung bleibt möglich.');}
+ sync(true);select.onchange=fields;
+ $('edit-update').onclick=()=>guard(()=>update(draft.arrows.map(a=>a.id===select.value?values(a.id):a)));
+ $('edit-add').onclick=()=>guard(()=>{let i=1;while(draft.arrows.some(a=>a.id===`e${i}`))i++;update([...draft.arrows,values(`e${i}`)]);select.value=`e${i}`;fields();});
+ $('edit-delete').onclick=()=>guard(()=>update(draft.arrows.filter(a=>a.id!==select.value)));
+ $('edit-center').onclick=()=>scene?.resetCamera();
+ input('edit-name').onchange=()=>guard(()=>{draft=parseLevel({...draft,name:input('edit-name').value});$<HTMLTextAreaElement>('edit-json').value=JSON.stringify(draft,null,2);});
+ $('edit-solve').onclick=()=>{const a=analyze(draft.arrows);message(`${a.solvable?'Lösbar ✓':'Nicht lösbar ✕'} · ${a.startMoves.length} Startzüge · Tiefe ${a.dependencyDepth} · Heuristik ${a.score} (keine exakte Schwierigkeit). ${a.solvable?'Lösung: '+a.solution.join(' → '):'Blockierte Restpfeile: '+a.remaining.join(', ')}`);};
+ $('edit-test').onclick=()=>{if(!analyze(draft.arrows).solvable){message('Dieses Level ist nicht lösbar. Ändere die Pfeilrichtungen.');return;}const l=structuredClone(draft);dialog.close();onTest(l);};
+ $('edit-import').onclick=()=>guard(()=>{draft=parseLevel(JSON.parse($<HTMLTextAreaElement>('edit-json').value));sync(true);message('Level importiert.');});
+ input('edit-file').onchange=async()=>{const file=input('edit-file').files?.[0];if(!file)return;if(file.size>200000){message('JSON-Datei ist zu groß (maximal 200 KB).');return;}const text=await file.text();guard(()=>{draft=parseLevel(JSON.parse(text));sync(true);message('Datei importiert.');});};
+ $('edit-export').onclick=()=>{const url=URL.createObjectURL(new Blob([JSON.stringify(draft,null,2)],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download='vector-level.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+ $('edit-generate').onclick=()=>guard(()=>{const count=Number(input('gen-count').value),shape=$<HTMLSelectElement>('gen-shape').value as 'block'|'tower'|'shell'|'cross'|'ring';draft=generate({count,seed:Number(input('gen-seed').value),shape,dimensions:shape==='tower'?[5,12,5]:[9,5,9]});sync(true);message('Lösbares Puzzle erzeugt. Die Lösungsprüfung zeigt seine Eigenschaften.');});
+ dialog.addEventListener('close',()=>{scene?.dispose();dialog.classList.remove('editor-dialog');},{once:true});
+}

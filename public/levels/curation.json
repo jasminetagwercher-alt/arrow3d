@@ -1,0 +1,863 @@
+{
+  "version": 1,
+  "tutorials": 5,
+  "candidatesEvaluated": 1140,
+  "method": "12 reverse-generated candidates per level; deterministic heuristic selection, not human playtest curation",
+  "levels": [
+    {
+      "id": 6,
+      "shape": "block",
+      "count": 11,
+      "startMoves": 9,
+      "depth": 2,
+      "score": 13,
+      "averageChoices": 5
+    },
+    {
+      "id": 7,
+      "shape": "block",
+      "count": 11,
+      "startMoves": 9,
+      "depth": 2,
+      "score": 13,
+      "averageChoices": 4.82
+    },
+    {
+      "id": 8,
+      "shape": "block",
+      "count": 12,
+      "startMoves": 9,
+      "depth": 2,
+      "score": 15,
+      "averageChoices": 4.67
+    },
+    {
+      "id": 9,
+      "shape": "block",
+      "count": 12,
+      "startMoves": 9,
+      "depth": 2,
+      "score": 15,
+      "averageChoices": 5.33
+    },
+    {
+      "id": 10,
+      "shape": "block",
+      "count": 13,
+      "startMoves": 10,
+      "depth": 2,
+      "score": 14,
+      "averageChoices": 6.46
+    },
+    {
+      "id": 11,
+      "shape": "block",
+      "count": 15,
+      "startMoves": 10,
+      "depth": 3,
+      "score": 21,
+      "averageChoices": 4.93
+    },
+    {
+      "id": 12,
+      "shape": "block",
+      "count": 16,
+      "startMoves": 12,
+      "depth": 3,
+      "score": 21,
+      "averageChoices": 5.88
+    },
+    {
+      "id": 13,
+      "shape": "block",
+      "count": 17,
+      "startMoves": 12,
+      "depth": 3,
+      "score": 22,
+      "averageChoices": 6.06
+    },
+    {
+      "id": 14,
+      "shape": "block",
+      "count": 18,
+      "startMoves": 12,
+      "depth": 4,
+      "score": 24,
+      "averageChoices": 5.94
+    },
+    {
+      "id": 15,
+      "shape": "block",
+      "count": 19,
+      "startMoves": 11,
+      "depth": 4,
+      "score": 27,
+      "averageChoices": 5.26
+    },
+    {
+      "id": 16,
+      "shape": "block",
+      "count": 20,
+      "startMoves": 12,
+      "depth": 4,
+      "score": 28,
+      "averageChoices": 6.1
+    },
+    {
+      "id": 17,
+      "shape": "block",
+      "count": 21,
+      "startMoves": 11,
+      "depth": 4,
+      "score": 27,
+      "averageChoices": 7.24
+    },
+    {
+      "id": 18,
+      "shape": "block",
+      "count": 22,
+      "startMoves": 17,
+      "depth": 4,
+      "score": 26,
+      "averageChoices": 7.95
+    },
+    {
+      "id": 19,
+      "shape": "block",
+      "count": 23,
+      "startMoves": 15,
+      "depth": 3,
+      "score": 25,
+      "averageChoices": 7.87
+    },
+    {
+      "id": 20,
+      "shape": "block",
+      "count": 24,
+      "startMoves": 16,
+      "depth": 3,
+      "score": 26,
+      "averageChoices": 8.25
+    },
+    {
+      "id": 21,
+      "shape": "tower",
+      "count": 24,
+      "startMoves": 17,
+      "depth": 4,
+      "score": 31,
+      "averageChoices": 7.96
+    },
+    {
+      "id": 22,
+      "shape": "tower",
+      "count": 25,
+      "startMoves": 15,
+      "depth": 3,
+      "score": 28,
+      "averageChoices": 8.08
+    },
+    {
+      "id": 23,
+      "shape": "tower",
+      "count": 26,
+      "startMoves": 14,
+      "depth": 4,
+      "score": 32,
+      "averageChoices": 6.31
+    },
+    {
+      "id": 24,
+      "shape": "tower",
+      "count": 27,
+      "startMoves": 15,
+      "depth": 3,
+      "score": 31,
+      "averageChoices": 8.11
+    },
+    {
+      "id": 25,
+      "shape": "tower",
+      "count": 28,
+      "startMoves": 18,
+      "depth": 4,
+      "score": 33,
+      "averageChoices": 8.75
+    },
+    {
+      "id": 26,
+      "shape": "tower",
+      "count": 29,
+      "startMoves": 17,
+      "depth": 4,
+      "score": 35,
+      "averageChoices": 7.97
+    },
+    {
+      "id": 27,
+      "shape": "tower",
+      "count": 30,
+      "startMoves": 18,
+      "depth": 4,
+      "score": 35,
+      "averageChoices": 8.63
+    },
+    {
+      "id": 28,
+      "shape": "tower",
+      "count": 31,
+      "startMoves": 20,
+      "depth": 4,
+      "score": 35,
+      "averageChoices": 8.94
+    },
+    {
+      "id": 29,
+      "shape": "tower",
+      "count": 32,
+      "startMoves": 18,
+      "depth": 4,
+      "score": 37,
+      "averageChoices": 8.91
+    },
+    {
+      "id": 30,
+      "shape": "tower",
+      "count": 33,
+      "startMoves": 19,
+      "depth": 4,
+      "score": 37,
+      "averageChoices": 9.42
+    },
+    {
+      "id": 31,
+      "shape": "block",
+      "count": 34,
+      "startMoves": 25,
+      "depth": 4,
+      "score": 32,
+      "averageChoices": 11.15
+    },
+    {
+      "id": 32,
+      "shape": "shell",
+      "count": 35,
+      "startMoves": 23,
+      "depth": 4,
+      "score": 36,
+      "averageChoices": 11.71
+    },
+    {
+      "id": 33,
+      "shape": "block",
+      "count": 36,
+      "startMoves": 24,
+      "depth": 4,
+      "score": 35,
+      "averageChoices": 11.44
+    },
+    {
+      "id": 34,
+      "shape": "block",
+      "count": 37,
+      "startMoves": 27,
+      "depth": 5,
+      "score": 37,
+      "averageChoices": 12.24
+    },
+    {
+      "id": 35,
+      "shape": "block",
+      "count": 38,
+      "startMoves": 24,
+      "depth": 4,
+      "score": 36,
+      "averageChoices": 11.05
+    },
+    {
+      "id": 36,
+      "shape": "shell",
+      "count": 39,
+      "startMoves": 28,
+      "depth": 4,
+      "score": 36,
+      "averageChoices": 13.31
+    },
+    {
+      "id": 37,
+      "shape": "block",
+      "count": 40,
+      "startMoves": 27,
+      "depth": 6,
+      "score": 43,
+      "averageChoices": 12.28
+    },
+    {
+      "id": 38,
+      "shape": "block",
+      "count": 41,
+      "startMoves": 26,
+      "depth": 4,
+      "score": 37,
+      "averageChoices": 13.07
+    },
+    {
+      "id": 39,
+      "shape": "block",
+      "count": 42,
+      "startMoves": 29,
+      "depth": 5,
+      "score": 40,
+      "averageChoices": 14.31
+    },
+    {
+      "id": 40,
+      "shape": "shell",
+      "count": 43,
+      "startMoves": 32,
+      "depth": 5,
+      "score": 42,
+      "averageChoices": 13.77
+    },
+    {
+      "id": 41,
+      "shape": "block",
+      "count": 46,
+      "startMoves": 27,
+      "depth": 4,
+      "score": 42,
+      "averageChoices": 13.3
+    },
+    {
+      "id": 42,
+      "shape": "block",
+      "count": 47,
+      "startMoves": 31,
+      "depth": 4,
+      "score": 41,
+      "averageChoices": 15.45
+    },
+    {
+      "id": 43,
+      "shape": "block",
+      "count": 48,
+      "startMoves": 35,
+      "depth": 6,
+      "score": 47,
+      "averageChoices": 15.52
+    },
+    {
+      "id": 44,
+      "shape": "shell",
+      "count": 49,
+      "startMoves": 28,
+      "depth": 4,
+      "score": 43,
+      "averageChoices": 12.65
+    },
+    {
+      "id": 45,
+      "shape": "block",
+      "count": 50,
+      "startMoves": 35,
+      "depth": 5,
+      "score": 44,
+      "averageChoices": 16.6
+    },
+    {
+      "id": 46,
+      "shape": "block",
+      "count": 51,
+      "startMoves": 35,
+      "depth": 5,
+      "score": 45,
+      "averageChoices": 17.02
+    },
+    {
+      "id": 47,
+      "shape": "block",
+      "count": 52,
+      "startMoves": 35,
+      "depth": 6,
+      "score": 49,
+      "averageChoices": 15.37
+    },
+    {
+      "id": 48,
+      "shape": "shell",
+      "count": 53,
+      "startMoves": 29,
+      "depth": 4,
+      "score": 46,
+      "averageChoices": 15.55
+    },
+    {
+      "id": 49,
+      "shape": "block",
+      "count": 54,
+      "startMoves": 38,
+      "depth": 5,
+      "score": 46,
+      "averageChoices": 17.37
+    },
+    {
+      "id": 50,
+      "shape": "block",
+      "count": 55,
+      "startMoves": 30,
+      "depth": 6,
+      "score": 52,
+      "averageChoices": 13.85
+    },
+    {
+      "id": 51,
+      "shape": "block",
+      "count": 60,
+      "startMoves": 40,
+      "depth": 4,
+      "score": 46,
+      "averageChoices": 18.12
+    },
+    {
+      "id": 52,
+      "shape": "shell",
+      "count": 61,
+      "startMoves": 40,
+      "depth": 4,
+      "score": 48,
+      "averageChoices": 19.26
+    },
+    {
+      "id": 53,
+      "shape": "block",
+      "count": 62,
+      "startMoves": 42,
+      "depth": 4,
+      "score": 47,
+      "averageChoices": 19.68
+    },
+    {
+      "id": 54,
+      "shape": "block",
+      "count": 63,
+      "startMoves": 46,
+      "depth": 5,
+      "score": 50,
+      "averageChoices": 22.29
+    },
+    {
+      "id": 55,
+      "shape": "block",
+      "count": 64,
+      "startMoves": 44,
+      "depth": 4,
+      "score": 48,
+      "averageChoices": 21.11
+    },
+    {
+      "id": 56,
+      "shape": "shell",
+      "count": 65,
+      "startMoves": 41,
+      "depth": 4,
+      "score": 51,
+      "averageChoices": 19.88
+    },
+    {
+      "id": 57,
+      "shape": "block",
+      "count": 66,
+      "startMoves": 46,
+      "depth": 4,
+      "score": 48,
+      "averageChoices": 22.98
+    },
+    {
+      "id": 58,
+      "shape": "block",
+      "count": 67,
+      "startMoves": 42,
+      "depth": 4,
+      "score": 50,
+      "averageChoices": 20.33
+    },
+    {
+      "id": 59,
+      "shape": "block",
+      "count": 68,
+      "startMoves": 41,
+      "depth": 5,
+      "score": 54,
+      "averageChoices": 18.21
+    },
+    {
+      "id": 60,
+      "shape": "shell",
+      "count": 69,
+      "startMoves": 41,
+      "depth": 4,
+      "score": 55,
+      "averageChoices": 24.04
+    },
+    {
+      "id": 61,
+      "shape": "shell",
+      "count": 76,
+      "startMoves": 46,
+      "depth": 4,
+      "score": 58,
+      "averageChoices": 22.26
+    },
+    {
+      "id": 62,
+      "shape": "shell",
+      "count": 77,
+      "startMoves": 51,
+      "depth": 5,
+      "score": 60,
+      "averageChoices": 23.68
+    },
+    {
+      "id": 63,
+      "shape": "shell",
+      "count": 78,
+      "startMoves": 49,
+      "depth": 5,
+      "score": 61,
+      "averageChoices": 23.09
+    },
+    {
+      "id": 64,
+      "shape": "shell",
+      "count": 79,
+      "startMoves": 49,
+      "depth": 4,
+      "score": 59,
+      "averageChoices": 24.24
+    },
+    {
+      "id": 65,
+      "shape": "shell",
+      "count": 80,
+      "startMoves": 47,
+      "depth": 5,
+      "score": 62,
+      "averageChoices": 23.1
+    },
+    {
+      "id": 66,
+      "shape": "shell",
+      "count": 81,
+      "startMoves": 55,
+      "depth": 6,
+      "score": 66,
+      "averageChoices": 26.35
+    },
+    {
+      "id": 67,
+      "shape": "shell",
+      "count": 82,
+      "startMoves": 50,
+      "depth": 6,
+      "score": 67,
+      "averageChoices": 22.98
+    },
+    {
+      "id": 68,
+      "shape": "shell",
+      "count": 83,
+      "startMoves": 54,
+      "depth": 5,
+      "score": 64,
+      "averageChoices": 26.1
+    },
+    {
+      "id": 69,
+      "shape": "shell",
+      "count": 84,
+      "startMoves": 50,
+      "depth": 5,
+      "score": 66,
+      "averageChoices": 22.08
+    },
+    {
+      "id": 70,
+      "shape": "shell",
+      "count": 85,
+      "startMoves": 44,
+      "depth": 4,
+      "score": 64,
+      "averageChoices": 22.53
+    },
+    {
+      "id": 71,
+      "shape": "cross",
+      "count": 94,
+      "startMoves": 69,
+      "depth": 5,
+      "score": 72,
+      "averageChoices": 31.54
+    },
+    {
+      "id": 72,
+      "shape": "cross",
+      "count": 95,
+      "startMoves": 75,
+      "depth": 5,
+      "score": 71,
+      "averageChoices": 35.74
+    },
+    {
+      "id": 73,
+      "shape": "cross",
+      "count": 96,
+      "startMoves": 70,
+      "depth": 5,
+      "score": 73,
+      "averageChoices": 31.7
+    },
+    {
+      "id": 74,
+      "shape": "cross",
+      "count": 97,
+      "startMoves": 72,
+      "depth": 6,
+      "score": 76,
+      "averageChoices": 32.61
+    },
+    {
+      "id": 75,
+      "shape": "cross",
+      "count": 98,
+      "startMoves": 76,
+      "depth": 5,
+      "score": 73,
+      "averageChoices": 35.13
+    },
+    {
+      "id": 76,
+      "shape": "cross",
+      "count": 99,
+      "startMoves": 74,
+      "depth": 6,
+      "score": 76,
+      "averageChoices": 33.04
+    },
+    {
+      "id": 77,
+      "shape": "cross",
+      "count": 100,
+      "startMoves": 68,
+      "depth": 5,
+      "score": 76,
+      "averageChoices": 30.56
+    },
+    {
+      "id": 78,
+      "shape": "cross",
+      "count": 101,
+      "startMoves": 70,
+      "depth": 5,
+      "score": 76,
+      "averageChoices": 28.97
+    },
+    {
+      "id": 79,
+      "shape": "cross",
+      "count": 102,
+      "startMoves": 67,
+      "depth": 5,
+      "score": 78,
+      "averageChoices": 32.09
+    },
+    {
+      "id": 80,
+      "shape": "cross",
+      "count": 103,
+      "startMoves": 74,
+      "depth": 5,
+      "score": 76,
+      "averageChoices": 33.31
+    },
+    {
+      "id": 81,
+      "shape": "ring",
+      "count": 116,
+      "startMoves": 79,
+      "depth": 6,
+      "score": 82,
+      "averageChoices": 35.67
+    },
+    {
+      "id": 82,
+      "shape": "ring",
+      "count": 117,
+      "startMoves": 70,
+      "depth": 5,
+      "score": 81,
+      "averageChoices": 35.39
+    },
+    {
+      "id": 83,
+      "shape": "ring",
+      "count": 118,
+      "startMoves": 74,
+      "depth": 6,
+      "score": 84,
+      "averageChoices": 34.46
+    },
+    {
+      "id": 84,
+      "shape": "ring",
+      "count": 119,
+      "startMoves": 75,
+      "depth": 4,
+      "score": 79,
+      "averageChoices": 34.03
+    },
+    {
+      "id": 85,
+      "shape": "ring",
+      "count": 120,
+      "startMoves": 75,
+      "depth": 6,
+      "score": 87,
+      "averageChoices": 36.66
+    },
+    {
+      "id": 86,
+      "shape": "ring",
+      "count": 121,
+      "startMoves": 81,
+      "depth": 5,
+      "score": 82,
+      "averageChoices": 37.07
+    },
+    {
+      "id": 87,
+      "shape": "ring",
+      "count": 122,
+      "startMoves": 81,
+      "depth": 5,
+      "score": 82,
+      "averageChoices": 37.79
+    },
+    {
+      "id": 88,
+      "shape": "ring",
+      "count": 123,
+      "startMoves": 72,
+      "depth": 4,
+      "score": 83,
+      "averageChoices": 34.07
+    },
+    {
+      "id": 89,
+      "shape": "ring",
+      "count": 124,
+      "startMoves": 77,
+      "depth": 5,
+      "score": 86,
+      "averageChoices": 37.15
+    },
+    {
+      "id": 90,
+      "shape": "ring",
+      "count": 125,
+      "startMoves": 83,
+      "depth": 5,
+      "score": 85,
+      "averageChoices": 40.21
+    },
+    {
+      "id": 91,
+      "shape": "block",
+      "count": 138,
+      "startMoves": 82,
+      "depth": 6,
+      "score": 92,
+      "averageChoices": 39.49
+    },
+    {
+      "id": 92,
+      "shape": "shell",
+      "count": 139,
+      "startMoves": 84,
+      "depth": 6,
+      "score": 96,
+      "averageChoices": 38.55
+    },
+    {
+      "id": 93,
+      "shape": "block",
+      "count": 141,
+      "startMoves": 81,
+      "depth": 5,
+      "score": 91,
+      "averageChoices": 39.7
+    },
+    {
+      "id": 94,
+      "shape": "block",
+      "count": 142,
+      "startMoves": 82,
+      "depth": 6,
+      "score": 95,
+      "averageChoices": 36.82
+    },
+    {
+      "id": 95,
+      "shape": "block",
+      "count": 143,
+      "startMoves": 81,
+      "depth": 5,
+      "score": 93,
+      "averageChoices": 38.71
+    },
+    {
+      "id": 96,
+      "shape": "shell",
+      "count": 145,
+      "startMoves": 92,
+      "depth": 6,
+      "score": 99,
+      "averageChoices": 42.41
+    },
+    {
+      "id": 97,
+      "shape": "block",
+      "count": 146,
+      "startMoves": 81,
+      "depth": 6,
+      "score": 98,
+      "averageChoices": 39.64
+    },
+    {
+      "id": 98,
+      "shape": "block",
+      "count": 147,
+      "startMoves": 86,
+      "depth": 6,
+      "score": 97,
+      "averageChoices": 41.29
+    },
+    {
+      "id": 99,
+      "shape": "block",
+      "count": 149,
+      "startMoves": 86,
+      "depth": 7,
+      "score": 102,
+      "averageChoices": 40.73
+    },
+    {
+      "id": 100,
+      "shape": "shell",
+      "count": 150,
+      "startMoves": 92,
+      "depth": 6,
+      "score": 102,
+      "averageChoices": 44.65
+    }
+  ]
+}
