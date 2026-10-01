@@ -71,7 +71,7 @@ Der Produktions-Build erzeugt Manifest, Icons und einen Service Worker. Nach dem
 
 ## GitHub Pages
 
-Unter **Settings → Pages → Build and deployment → Source** muss **GitHub Actions** ausgewählt sein. Der Workflow **Publish VECTOR to GitHub Pages** baut das Spiel und veröffentlicht `dist/`. Die direkte Veröffentlichung des Quellcodes aus `main` führt zu einer leeren Seite und konkurriert mit dem korrekten Deployment.
+Unter **Settings → Pages → Build and deployment → Source** muss **GitHub Actions** ausgewählt sein. Der Workflow **Publish VECTOR to GitHub Pages** baut das Spiel und veröffentlicht `dist/`. Bei einer noch aktiven direkten Veröffentlichung aus `main` startet der neue Workflow nach dem eingebauten Pages-Lauf nochmals und stellt die gebaute App wieder her. Die Umstellung auf **GitHub Actions** vermeidet diesen unnötigen Doppellauf.
 
 ## Nächste Entwicklungsschritte
 
