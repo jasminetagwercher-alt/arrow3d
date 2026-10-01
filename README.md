@@ -2,6 +2,10 @@
 
 Werbefreies, clientseitiges 3D-Puzzle in TypeScript, Three.js und Vite. Keine Konten, Analytics, externen Fonts oder In-App-Käufe.
 
+![VECTOR – Level 25](docs/preview.png)
+
+[Prüfbericht](docs/VALIDATION.md) · [Automatische Tests](../../actions)
+
 ## Lokal starten
 
 Node.js 22.12+ oder 24 LTS:
